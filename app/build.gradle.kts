@@ -40,5 +40,6 @@ dependencies {
 
     // New for API
     implementation("com.android.volley:volley:1.2.1")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.16.0")
 
 }

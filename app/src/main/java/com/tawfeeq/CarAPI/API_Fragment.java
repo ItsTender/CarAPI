@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,24 +11,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.util.Collections;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -97,51 +87,19 @@ public class API_Fragment extends Fragment {
         tv = getView().findViewById(R.id.textView);
 
 
-
         //String apiUrl = "https://api.api-ninjas.com/v1/cars?limit=2&model=camry";
         //String apiKey = "YvdWR7GkBUbsdWvZLCjY1NnEgYmdHXYNwke58b9T";
 
 
+        //https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMake/honda?format=json
+        // TODO: use this free keyless API........
 
-        try {
-            // URL and query parameters
-            String baseUrl = "https://api.carsxe.com/specs";
-            String apiKey = "9e6p0jzoa_4s0y9mni2_jf418c69y";
-            String vin = "WBAFR7C57CC811956";
 
-            // Encode parameters
-            String query = String.format("key=%s&vin=%s", URLEncoder.encode(apiKey, "UTF-8"), URLEncoder.encode(vin, "UTF-8"));
 
-            // Construct full URL
-            URL url = new URL(baseUrl + "?" + query);
 
-            // Create HttpURLConnection
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
 
-            // Get response code
-            int responseCode = connection.getResponseCode();
-            System.out.println("Response Code: " + responseCode);
 
-            // Read response
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
 
-            while ((inputLine = reader.readLine()) != null) {
-                response.append(inputLine);
-            }
-            reader.close();
-
-            // Print response
-            System.out.println("Response: " + response.toString());
-
-            // Close connection
-            connection.disconnect();
-
-        } catch (Exception e) {
-            Toast.makeText(getActivity(), "Error Bruh", Toast.LENGTH_SHORT).show();
-        }
 
 
 
